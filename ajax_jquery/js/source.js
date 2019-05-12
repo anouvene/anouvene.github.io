@@ -5,19 +5,21 @@ $(function() {
 	// Ajouter eleve
 	$("#btnAddEleve").on("click", function() {
 
-		const nomTxt = $("#txtNom").val();
-		const prenomTxt = $("#txtPrenom").val();
+		const nomTxt = $("#txtNom").val().trim();
+		const prenomTxt = $("#txtPrenom").val().trim();
 
-		// Nouvel eleve
-		const eleve = {
-			idEleve: tblEleves.length + 1,
-			nom: nomTxt,
-			prenom: prenomTxt,
-			notes: []
+		if(nomTxt !== "" && prenomTxt !== "") {
+			// Nouvel eleve
+			const eleve = {
+				idEleve: tblEleves.length + 1,
+				nom: nomTxt,
+				prenom: prenomTxt,
+				notes: []
+			}
+
+			// Ajouter eleve dans la table tblEleves
+			tblEleves.push(eleve);
 		}
-
-		// Ajouter eleve dans la table tblEleves
-		tblEleves.push(eleve);
 		
 		// Vider les champs
 		$("#txtIdEleve").val("");
