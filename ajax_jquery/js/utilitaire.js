@@ -1,5 +1,5 @@
 let tblEleves = [
-	{idEleve :1,nom:"prost",prenom:"Alain",notes:[
+	{idEleve :1,nom:"Prost",prenom:"Alain",notes:[
 		{idNote:1,valeur:18 , coef:4 , matiere:"MATHS",dateExam:"18/02/2019"},
 		{idNote:2,valeur:15 , coef:3 , matiere:"INFO",dateExam:"13/03/2019"},
 		{idNote:3,valeur:12 , coef:3 , matiere:"ANGLAIS",dateExam:"15/03/2019"}
@@ -106,44 +106,6 @@ function getEleveById(id) {
 	return JSON.stringify(eleve);
 }
 
-
-/**
- * Insérer une nouvelle ligne tr (eleve) dans un table
- * @param {*} valeurs 
- */
-function insererLigneEleve(valeurs) {
-	const {nom, prenom} = valeurs;
-	
-	let nbEleves = tblEleves.length + 1;
-			
-	if(nom !== "" && prenom .trim() !== "") {
-		tdIdEleve = "<td>"+ nbEleves +"</td>";
-		tdNom = "<td>"+ nom +"</td>";
-		tdPrenom ="<td>"+ prenom +"</td>";
-		
-		tdActions =  "<td class='text-success'>";
-		tdActions += "<a href='#collapseNote' title='Voir les notes' class='btn btn-success btn-voir' data-ideleve='" + nbEleves + "' data-toggle='collapse' data-target='#collapseNotes'><i class='material-icons md-24'>notes</i></a> ";
-		tdActions += "<a href='#eleve' title='Modifier un élève' class='btn btn-warning btn-edit' data-toggle='modal' data-target='#editEleveModal'><i class='material-icons md-24'>edit</i></a>" ;
-		tdActions += " <a href='#eleve' title='Supprimer un élève' class='btn btn-danger btn-delete'><i class='material-icons md-24'>delete_forever</i></a></td>";
-		
-		$tr = $("<tr data-toggle='collapse' data-target='#eleve_" + nbEleves +"' class='accordion-toggle'>" 
-				+ tdIdEleve 
-				+ tdNom 
-				+ tdPrenom
-				+ tdActions
-				+ "</tr>");
-		
-		let eleve = null;
-		
-		eleve = { "idEleve": nbEleves, "nom": nom, "prenom": prenom, "notes": [] };
-		
-		// Ajouter cet nouvel eleve dans le tableau tblEleves
-		tblEleves.push(eleve);
-		
-		return $tr;
-	}
-}
-
 /**
  * Générer les lignes tr de notes
  * @param {*} eleve 
@@ -191,7 +153,7 @@ function GenererModalTableauNotesDunEleve(notes, composantGraphiqueParent) {
 				+ "<td>" + "<input type=''text' name='valeur' value='" + note.valeur + "' class='form-control' readonly>" +"</td>"
 				+ "<td>" + "<input type='text' name='dateExam' value='" + note.dateExam +"' class='form-control' readonly>" +"</td>"
 				+ "<td><a href='#note' title='Modifier une note' class='btn btn-success btn-modal-edit'><i class='material-icons md-24'>edit</i></a></td>"		  
-				+ "<td colspan='2'><a href='#note' title='Supprimer une note' class='btn btn-danger btn-modal-delete'><i class='material-icons md-24'>delete_forever</i></a></td>"						
+				+ "<td><a href='#note' title='Supprimer une note' class='btn btn-danger btn-modal-delete'><i class='material-icons md-24'>delete_forever</i></a></td>"						
 				+ "</tr>");
 		
 		$tr.appendTo($("#notesModalTbody"));
